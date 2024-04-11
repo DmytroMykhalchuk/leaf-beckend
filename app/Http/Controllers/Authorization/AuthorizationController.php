@@ -54,6 +54,8 @@ class AuthorizationController extends BaseController
             $initAccountRequest->getLocale(),
             $initAccountRequest->getPicture(),
             $initAccountRequest->getIsEmailNotify(),
+            $initAccountRequest->getCountry(),
+            $initAccountRequest->getRole(),
         );
 
         $data = $this->authorizationAction->initAccount($accountData, $provider);

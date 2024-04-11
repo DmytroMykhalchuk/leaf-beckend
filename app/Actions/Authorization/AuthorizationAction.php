@@ -50,11 +50,12 @@ class AuthorizationAction
     public function initAccount(InitAccount $initAccount, Provider $provider): array
     {
         $user = new User();
-        //todo check if exists
         $user->nickname = $initAccount->getNickname();
         $user->email = $initAccount->getEmail();
         $user->locale = $initAccount->getLocale();
         $user->is_email_notify = $initAccount->getIsEmailNotify();
+        $user->country = $initAccount->getCountry();
+        $user->role = $initAccount->getRole();
 
         $savePuctireName = $this->saveProfilePicture($initAccount->getPicture());
         $user->picture = '/assets/avatars/' . $savePuctireName;

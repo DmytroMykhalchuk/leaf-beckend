@@ -17,14 +17,16 @@ class InitAccountRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nickname' => 'required|string|min:1|max:50',
-            'email' => 'required|string',
-            'locale' => 'nullable|string',
-            'picture' => 'required|mimes:jpeg,jpg,png|max:5120',
+            'nickname'        => 'required|string|min:1|max:50',
+            'email'           => 'required|string',
+            'locale'          => 'nullable|string',
+            'picture'         => 'required|mimes:jpeg,jpg,png|max:5120',
             'is_email_notify' => 'required|boolean',
-            'provider' => 'nullable|array',
-            'provider.name' => 'nullable|string|in:google',
-            'provider.id' => 'nullable|string|max:100',
+            'provider'        => 'nullable|array',
+            'provider.name'   => 'nullable|string|in:google',
+            'provider.id'     => 'nullable|string|max:100',
+            'country'         => 'required|string|max:100',
+            'role'            => 'required|string|in:coach,student',
         ];
     }
 
@@ -61,5 +63,15 @@ class InitAccountRequest extends FormRequest
     public function getProviderId(): string
     {
         return $this->get('provider', [])['id'] ?? '';
+    }
+
+    public function getCountry(): string
+    {
+        return $this->get('country');
+    }
+
+    public function getRole(): string
+    {
+        return $this->get('role');
     }
 }

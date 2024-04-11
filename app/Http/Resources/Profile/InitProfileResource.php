@@ -15,7 +15,8 @@ class InitProfileResource extends JsonResource
         return [
             'nickname' => $this->nickname,
             'email'    => $this->email,
-            'picture'  => asset('asset/' . $this->picture),
+            'picture'  => $this->picture,
+            'role'     => $this->role,
         ];
     }
-}   
+}

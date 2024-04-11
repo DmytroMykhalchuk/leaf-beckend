@@ -11,11 +11,11 @@ Route::group([
     'prefix' => 'auth'
 
 ], function () {
-    // Route::post('login', 'AuthController@login');
-    // Route::post('logout', 'AuthController@logout');
-    // Route::post('refresh', 'AuthController@refresh');
-    // Route::post('me', 'AuthController@me');
-    // Route::post('create-account', [UserAuthController::class, 'createAccount']);
+    // Route::post('login', 'UserAuthController@login');
+    // Route::post('logout', 'UserAuthController@logout');
+    Route::post('refresh', [UserAuthController::class, 'refresh']);
+    Route::post('me', [UserAuthController::class, 'me']);
+    // Route::post('create-account', [UserUserAuthController::class, 'createAccount']);
 });
 
 Route::group([

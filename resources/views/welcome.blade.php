@@ -168,5 +168,7 @@
                 </div>
             </div>
         </div>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint nulla inventore error repellendus neque voluptatum blanditiis et quos sequi, nam enim quo sit reiciendis commodi aliquid ab consequuntur ut? Voluptatem?
+        <img src="{{ asset('storage'.'/user-avatar/17126509076614fa9b11775.jpg') }}" alt="Image" >
     </body>
 </html>
