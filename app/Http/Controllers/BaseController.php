@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\JsonResponse;
-
 abstract class BaseController extends Controller
 {
     public function formatResponse(array $data)

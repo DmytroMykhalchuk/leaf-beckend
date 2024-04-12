@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Authorization\AuthorizationController;
+use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\UserAuth\UserAuthController;
+use App\Http\Services\ImageService;
 use App\Mail\AuthEmailCode;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -33,7 +35,21 @@ Route::group([
     Route::post('login-by-google', [AuthorizationController::class, 'loginByGoogle']);
 });
 
+Route::group(([
+    'middleware' => 'api',
+    'prefix' => 'profile',
+]), function () {
+    Route::post('update', [ProfileController::class, 'updateProfile']);
+
+    Route::post('change-email-request', [ProfileController::class, 'changeEmail']);
+    Route::post('confirm-email-changing', [ProfileController::class, 'confirmEmailChanging']);
+});
+
 
 Route::get('/test', function () {
+    $imageService = new ImageService();
+
+    // $response = $imageService->deleteProfilePicture('/assets/avatars/1712821234661793f26990f.jpg');
+    // dd($response);
     return 1;
 });

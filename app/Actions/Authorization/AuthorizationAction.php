@@ -5,6 +5,7 @@ namespace App\Actions\Authorization;
 use App\Actions\Authorization\Objects\InitAccount;
 use App\Actions\Authorization\Objects\Provider;
 use App\Http\Resources\Profile\InitProfileResource;
+use App\Http\Services\ImageService;
 use App\Mail\AuthEmailCode;
 use App\Models\User;
 use App\Models\UserProvider;
@@ -15,6 +16,13 @@ use Illuminate\Support\Facades\Storage;
 
 class AuthorizationAction
 {
+    private ImageService $imageService;
+
+    public function __construct()
+    {
+        $this->imageService = new ImageService();
+    }
+
     public function checkNicknameUnique(string $nickname): array
     {
         $user = User::where('nickname', $nickname)->first();
@@ -57,8 +65,8 @@ class AuthorizationAction
         $user->country = $initAccount->getCountry();
         $user->role = $initAccount->getRole();
 
-        $savePuctireName = $this->saveProfilePicture($initAccount->getPicture());
-        $user->picture = '/assets/avatars/' . $savePuctireName;
+        $savePuctireName = $this->imageService->saveProfilePicture($initAccount->getPicture());
+        $user->picture = $savePuctireName;
 
         $user->save();
 
@@ -205,19 +213,6 @@ class AuthorizationAction
         $userProvider->save();
 
         return $this->authorizeUser($user);
-    }
-
-    private function saveProfilePicture($picture)
-    {
-        if (!$picture->isValid()) {
-            return null;
-        }
-
-        $pictureName = time() . uniqid() . '.' . $picture->getClientOriginalExtension();
-
-        $picture->move(public_path('assets/avatars'), $pictureName);
-
-        return $pictureName;
     }
 
     private function authorizeUser(User $user): array

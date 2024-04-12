@@ -71,4 +71,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(UserProvider::class, 'user_id', 'id');
     }
+
+    public function changeEmails()
+    {
+        return $this->hasMany(UserChangeEmail::class, 'user_id', 'id');
+    }
 }
