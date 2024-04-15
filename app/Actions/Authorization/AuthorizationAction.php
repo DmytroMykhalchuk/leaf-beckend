@@ -130,7 +130,7 @@ class AuthorizationAction
             'code' => 200,
             'status' => 'success',
             'message' => 'Successfully sended',
-            'data' => '',
+            'data' => [],
         ];
     }
 
@@ -149,7 +149,7 @@ class AuthorizationAction
 
         if ($user->email_code !== $code) {
             return [
-                'code' => 422,
+                'code' => 400,
                 'status' => 'error',
                 'message' => 'Wrong code',
                 'data' => [],

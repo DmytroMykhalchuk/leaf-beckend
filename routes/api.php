@@ -43,6 +43,10 @@ Route::group(([
 
     Route::post('change-email-request', [ProfileController::class, 'changeEmail']);
     Route::post('confirm-email-changing', [ProfileController::class, 'confirmEmailChanging']);
+    Route::post('change-email-provider', [ProfileController::class, 'changeEmailProvider']);
+
+    Route::post('request-email-code', [ProfileController::class, 'requestEmailCode']);
+    Route::post('confirm-current-email', [ProfileController::class, 'confirmCurrentEmail']);
 });
 
 
