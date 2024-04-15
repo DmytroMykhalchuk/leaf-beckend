@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Authorization;
+namespace App\Http\Requests\Profile;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class InitAccountRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -18,13 +18,8 @@ class InitAccountRequest extends FormRequest
     {
         return [
             'nickname'        => 'required|string|min:1|max:50',
-            'email'           => 'required|string',
-            'locale'          => 'nullable|string',
-            'picture'         => 'required|mimes:jpeg,jpg,png|max:5120',
+            'picture'         => 'nullable|mimes:jpeg,jpg,png|max:5120',
             'is_email_notify' => 'required|boolean',
-            'provider'        => 'nullable|array',
-            'provider.name'   => 'nullable|string|in:google',
-            'provider.id'     => 'nullable|string|max:100',
             'country'         => 'required|string|max:100',
             'role'            => 'required|string|in:coach,student',
         ];
@@ -35,17 +30,7 @@ class InitAccountRequest extends FormRequest
         return $this->get('nickname');
     }
 
-    public function getEmail(): string
-    {
-        return $this->get('email');
-    }
-
-    public function getLocale(): string
-    {
-        return $this->get('locale') ?? 'uk';
-    }
-
-    public function getPicture(): object
+    public function getPicture(): null|object
     {
         return $this->file('picture');
     }
@@ -53,16 +38,6 @@ class InitAccountRequest extends FormRequest
     public function getIsEmailNotify(): bool
     {
         return $this->get('is_email_notify');
-    }
-
-    public function getProviderName(): string
-    {
-        return $this->get('provider', [])['name'] ?? '';
-    }
-
-    public function getProviderId(): string
-    {
-        return $this->get('provider', [])['id'] ?? '';
     }
 
     public function getCountry(): string

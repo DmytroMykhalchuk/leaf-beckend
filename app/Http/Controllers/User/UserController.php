@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\AbstractController;
+use App\Http\Controllers\BaseController;
 
-class UserController extends AbstractController
+class UserController extends BaseController
 {
     public function __construct()
     {
